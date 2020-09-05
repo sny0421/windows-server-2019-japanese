@@ -29,7 +29,7 @@
             "identity": {
                 "type": "UserAssigned",
                 "userAssignedIdentities": {
-                    "<imgBuilderId>": {
+                    "/subscriptions/269616a1-20ce-473c-9255-88c2446ebeef/resourcegroups/AIB-Deploy-RG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aibIdentity1599277093": {
                     }
 
                 }
@@ -78,19 +78,23 @@
                         "type": "File",
                         "name": "ja-JP-welcome",
                         "sourceUri": "https://raw.githubusercontent.com/sny0421/windows-server-2019-japanese/master/registry/ja-JP-welcome.reg",
-                        "destination": "C:\ja-JP-welcome.reg"
+                        "destination": "C:\\"
                     },
                     {
                         "type": "File",
                         "name": "ja-JP-default",
                         "sourceUri": "https://raw.githubusercontent.com/sny0421/windows-server-2019-japanese/master/registry/ja-JP-default.reg",
-                        "destination": "C:\ja-JP-default.reg"
+                        "destination": "C:\\"
                     },
                     {
                         "type": "PowerShell",
                         "name": "CreateBuildPath",
                         "runElevated": false,
                         "scriptUri": "https://raw.githubusercontent.com/sny0421/windows-server-2019-japanese/master/win2019jp_4.ps1"
+                    },
+                    {
+                        "type": "WindowsRestart",
+                        "restartTimeout": "5m"
                     },
                     {
                         "type": "WindowsUpdate",
@@ -105,9 +109,9 @@
                 "distribute": [
                     {
                         "type": "ManagedImage",
-                        "imageId": "/subscriptions/<subscriptionID>/resourceGroups/<rgName>/providers/Microsoft.Compute/images/<imageName>",
-                        "location": "<region>",
-                        "runOutputName": "<runOutputName>",
+                        "imageId": "/subscriptions/269616a1-20ce-473c-9255-88c2446ebeef/resourceGroups/AIB-Deploy-RG/providers/Microsoft.Compute/images/AIB-Windows-SV",
+                        "location": "westus",
+                        "runOutputName": "AIB-Output",
                         "artifactTags": {
                             "source": "azVmImageBuilder",
                             "baseosimg": "windows2019"
@@ -118,3 +122,13 @@
         }
     ]
 }
+
+
+
+
+
+
+
+
+
+

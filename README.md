@@ -105,3 +105,20 @@ $sigImageDefineName = "WinSV2019JapaneseAIB"
 
 New-AzGalleryImageDefinition -GalleryName $sigGallaryName -ResourceGroupName $sigResourceGroupName -Location $repLocation -Name $sigImageDefineName -OsState generalized -OsType Windows -Publisher 'AIB-Demo' -Offer 'Windows' -Sku 'Win2019'
 ```
+
+
+((Get-Content -path $templateFilePath -Raw) -replace '<subscriptionID>',$subscriptionID) | Set-Content -Path $templateFilePath
+((Get-Content -path $templateFilePath -Raw) -replace '<rgName>',$imageResourceGroup) | Set-Content -Path $templateFilePath
+((Get-Content -path $templateFilePath -Raw) -replace '<region>',$location) | Set-Content -Path $templateFilePath
+((Get-Content -path $templateFilePath -Raw) -replace '<runOutputName>',$runOutputName) | Set-Content -Path $templateFilePath
+
+((Get-Content -path $templateFilePath -Raw) -replace '<imageDefName>',$sigImageDefineName) | Set-Content -Path $templateFilePath
+((Get-Content -path $templateFilePath -Raw) -replace '<sharedImageGalName>',$sigGalleryName) | Set-Content -Path $templateFilePath
+((Get-Content -path $templateFilePath -Raw) -replace '<region1>',$location) | Set-Content -Path $templateFilePath
+((Get-Content -path $templateFilePath -Raw) -replace '<region2>',$repLocation) | Set-Content -Path $templateFilePath
+((Get-Content -path $templateFilePath -Raw) -replace '<imgBuilderId>',$idenityNameResourceId) | Set-Content -Path $templateFilePath
+((Get-Content -path $templateFilePath -Raw) -replace '<imageName>',$imageName) | Set-Content -Path $templateFilePath
+New-AzResourceGroupDeployment -ResourceGroupName $imageResourceGroup -TemplateFile $templateFilePath -api-version "2019-05-01-preview" -imageTemplateName $imageTemplateName -svclocation $location
+
+
+

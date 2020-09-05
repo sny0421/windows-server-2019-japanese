@@ -17,7 +17,9 @@ $languagePackPath = $driveLetter + ":\x64\langpacks\Microsoft-Windows-Server-Lan
 ## install language pack
 lpksetup.exe /i ja-JP /p $languagePackPath /r /s
 Wait-Process -Name lpksetup
+
+# Clean file
 ## Unmount disk
 DisMount-DiskImage $downloadPath
-## Delete ISO
+## Delete ISO file
 Remove-Item $downloadPath 
