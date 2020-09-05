@@ -31,7 +31,6 @@
                 "userAssignedIdentities": {
                     "<imgBuilderId>": {
                     }
-
                 }
             },
             "properties": {
