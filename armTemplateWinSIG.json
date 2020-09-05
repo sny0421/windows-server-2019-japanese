@@ -35,14 +35,11 @@
                 }
             },
             "properties": {
-
-                "buildTimeoutInMinutes": 100,
-
                 "vmProfile": {
-                    "vmSize": "Standard_D1_v2",
+                    "vmSize": "Standard_D4_v3",
                     "osDiskSizeGB": 127
                 },
-
+                "buildTimeoutInMinutes": 180,
                 "source": {
                     "type": "PlatformImage",
                     "publisher": "MicrosoftWindowsServer",
@@ -56,41 +53,35 @@
                         "type": "PowerShell",
                         "name": "CreateBuildPath",
                         "runElevated": false,
-                        "scriptUri": "https://raw.githubusercontent.com/sny0421/windows-server-2019-japanese/master/win2019jp_1.ps1"
+                        "scriptUri": "https://raw.githubusercontent.com/sny0421/windows-server-2019-japanese/master/script/install_language_pack.ps1"
                     },
                     {
                         "type": "PowerShell",
                         "name": "CreateBuildPath",
                         "runElevated": false,
-                        "scriptUri": "https://raw.githubusercontent.com/sny0421/windows-server-2019-japanese/master/win2019jp_2.ps1"
+                        "scriptUri": "https://raw.githubusercontent.com/sny0421/windows-server-2019-japanese/master/script/japanese_setting_1.ps1"
                     },
                     {
                         "type": "WindowsRestart",
                         "restartTimeout": "5m"
                     },
                     {
-                        "type": "PowerShell",
-                        "name": "CreateBuildPath",
-                        "runElevated": false,
-                        "scriptUri": "https://raw.githubusercontent.com/sny0421/windows-server-2019-japanese/master/win2019jp_3.ps1"
-                    },
-                    {
                         "type": "File",
                         "name": "ja-JP-welcome",
                         "sourceUri": "https://raw.githubusercontent.com/sny0421/windows-server-2019-japanese/master/registry/ja-JP-welcome.reg",
-                        "destination": "C:\\"
+                        "destination": "C:\\ja-JP-welcome.reg"
                     },
                     {
                         "type": "File",
                         "name": "ja-JP-default",
                         "sourceUri": "https://raw.githubusercontent.com/sny0421/windows-server-2019-japanese/master/registry/ja-JP-default.reg",
-                        "destination": "C:\\"
+                        "destination": "C:\\ja-JP-default.reg"
                     },
                     {
                         "type": "PowerShell",
                         "name": "CreateBuildPath",
                         "runElevated": false,
-                        "scriptUri": "https://raw.githubusercontent.com/sny0421/windows-server-2019-japanese/master/win2019jp_4.ps1"
+                        "scriptUri": "https://raw.githubusercontent.com/sny0421/windows-server-2019-japanese/master/script/japanese_setting_2.ps1"
                     },
                     {
                         "type": "WindowsRestart",
@@ -104,6 +95,10 @@
                             "include:$true"
                         ],
                         "updateLimit": 20
+                    },
+                    {
+                        "type": "WindowsRestart",
+                        "restartTimeout": "5m"
                     }
                 ],
                 "distribute": [
