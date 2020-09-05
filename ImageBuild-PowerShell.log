@@ -1,0 +1,425 @@
+**********************
+PowerShell transcript start
+Start time: 20200905105224
+Username: Moonstone\sny0421
+RunAs User: Moonstone\sny0421
+Configuration Name: 
+Machine: Moonstone (Unix 19.6.0.0)
+Host Application: /usr/local/microsoft/powershell/7/pwsh.dll -l
+Process ID: 85704
+PSVersion: 7.0.0
+PSEdition: Core
+GitCommitId: 7.0.0
+OS: Darwin 19.6.0 Darwin Kernel Version 19.6.0: Sat Jul  4 23:52:31 PDT 2020; root:xnu-6153.141.1~8/RELEASE_X86_64
+Platform: Unix
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.10032.0, 6.0.0, 6.1.0, 6.2.0, 7.0.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is ImageBuild-PowerShell.log
+PS /Users/sny0421/workspace/windows-server-2019-japanese-1> Get-AzContext
+
+Name                                     Account                                                SubscriptionName                                       Environment                                            TenantId
+----                                     -------                                                ----------------                                       -----------                                            --------
+MPN-SNY-LAB (269616a1-20ce-473c-9255-88… sny0421@ether-zone.com                                 MPN-SNY-LAB                                            AzureCloud                                             0af269ad-eced-4826-b79c-adfd4f0dc9a4
+
+PS /Users/sny0421/workspace/windows-server-2019-japanese-1> Get-AzProviderFeature -FeatureName VirtualMachineTemplatePreview -ProviderNamespace Microsoft.VirtualMachineImages
+
+FeatureName                   ProviderName                   RegistrationState
+-----------                   ------------                   -----------------
+VirtualMachineTemplatePreview Microsoft.VirtualMachineImages Registered
+
+PS /Users/sny0421/workspace/windows-server-2019-japanese-1> Get-AzResourceProvider -ProviderNamespace Microsoft.VirtualMachineImages
+
+ProviderNamespace : Microsoft.VirtualMachineImages
+RegistrationState : Registered
+ResourceTypes     : {imageTemplates}
+Locations         : {East US, East US 2, West Central US, West US…}
+
+ProviderNamespace : Microsoft.VirtualMachineImages
+RegistrationState : Registered
+ResourceTypes     : {imageTemplates/runOutputs}
+Locations         : {East US, East US 2, West Central US, West US…}
+
+ProviderNamespace : Microsoft.VirtualMachineImages
+RegistrationState : Registered
+ResourceTypes     : {locations}
+Locations         : {East US, East US 2, West Central US, West US…}
+
+ProviderNamespace : Microsoft.VirtualMachineImages
+RegistrationState : Registered
+ResourceTypes     : {locations/operations}
+Locations         : {East US, East US 2, West Central US, West US…}
+
+ProviderNamespace : Microsoft.VirtualMachineImages
+RegistrationState : Registered
+ResourceTypes     : {operations}
+Locations         : {East US, East US 2, West Central US, West US…}
+
+
+PS /Users/sny0421/workspace/windows-server-2019-japanese-1> Get-AzResourceProvider -ProviderNamespace Microsoft.Storage 
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {storageAccounts}
+Locations         : {East US, East US 2, West US, West Europe…}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {operations}
+Locations         : {East US, East US 2, West US, West Europe…}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {locations/asyncoperations}
+Locations         : {East US, East US 2, West US, West Europe…}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {storageAccounts/listAccountSas}
+Locations         : {East US, East US 2, West US, West Europe…}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {storageAccounts/listServiceSas}
+Locations         : {East US, East US 2, West US, West Europe…}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {storageAccounts/blobServices}
+Locations         : {East US, East US 2, West US, West Europe…}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {storageAccounts/tableServices}
+Locations         : {East US, East US 2, West US, West Europe…}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {storageAccounts/queueServices}
+Locations         : {East US, East US 2, West US, West Europe…}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {storageAccounts/fileServices}
+Locations         : {East US, East US 2, West US, West Europe…}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {locations}
+Locations         : {}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {locations/usages}
+Locations         : {East US, East US 2, West US, West Europe…}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {locations/deleteVirtualNetworkOrSubnets}
+Locations         : {East US, East US 2, West US, West Europe…}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {usages}
+Locations         : {}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {checkNameAvailability}
+Locations         : {East US, East US 2, West US, West Europe…}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {locations/checkNameAvailability}
+Locations         : {East US, East US 2, West US, West Europe…}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {storageAccounts/services}
+Locations         : {East US, West US, West Europe, North Europe…}
+
+ProviderNamespace : Microsoft.Storage
+RegistrationState : Registered
+ResourceTypes     : {storageAccounts/services/metricDefinitions}
+Locations         : {East US, West US, West Europe, North Europe…}
+
+
+PS /Users/sny0421/workspace/windows-server-2019-japanese-1> Get-AzResourceProvider -ProviderNamespace Microsoft.Compute
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {availabilitySets}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {virtualMachines}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {virtualMachines/extensions}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {virtualMachineScaleSets}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {virtualMachineScaleSets/extensions}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {virtualMachineScaleSets/virtualMachines}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {virtualMachineScaleSets/networkInterfaces}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {virtualMachineScaleSets/virtualMachines/networkInterfaces}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {virtualMachineScaleSets/publicIPAddresses}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {locations}
+Locations         : {}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {locations/operations}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {locations/vmSizes}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {locations/runCommands}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {locations/usages}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {locations/virtualMachines}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {locations/publishers}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {operations}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {restorePointCollections}
+Locations         : {Southeast Asia, East US 2, Central US, West Europe…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {restorePointCollections/restorePoints}
+Locations         : {Southeast Asia, East US 2, Central US, West Europe…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {proximityPlacementGroups}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {sshPublicKeys}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {virtualMachines/metricDefinitions}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {locations/spotEvictionRates}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {locations/spotPriceHistory}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {sharedVMImages}
+Locations         : {West Central US, South Central US, East US 2, Southeast Asia…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {sharedVMImages/versions}
+Locations         : {West Central US, South Central US, East US 2, Southeast Asia…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {locations/artifactPublishers}
+Locations         : {West Central US, South Central US, East US 2, Southeast Asia…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {locations/capsoperations}
+Locations         : {West Central US, South Central US, East US 2, Southeast Asia…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {galleries}
+Locations         : {West Central US, South Central US, East US 2, Southeast Asia…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {galleries/images}
+Locations         : {West Central US, South Central US, East US 2, Southeast Asia…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {galleries/images/versions}
+Locations         : {West Central US, South Central US, East US 2, Southeast Asia…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {locations/galleries}
+Locations         : {West Central US, South Central US, East US 2, Southeast Asia…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {disks}
+Locations         : {Southeast Asia, East US 2, Central US, West Europe…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {snapshots}
+Locations         : {Southeast Asia, East US 2, Central US, West Europe…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {locations/diskoperations}
+Locations         : {Southeast Asia, East US 2, Central US, West Europe…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {diskEncryptionSets}
+Locations         : {Southeast Asia, East US 2, Central US, West Europe…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {diskAccesses}
+Locations         : {Southeast Asia, East US 2, Central US, West Europe…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {images}
+Locations         : {Southeast Asia, East US 2, Central US, West Europe…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {locations/logAnalytics}
+Locations         : {East US, East US 2, West US, Central US…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {hostGroups}
+Locations         : {Central US, East US 2, West Europe, Southeast Asia…}
+
+ProviderNamespace : Microsoft.Compute
+RegistrationState : Registered
+ResourceTypes     : {hostGroups/hosts}
+Locations         : {Central US, East US 2, West Europe, Southeast Asia…}
+
+
+PS /Users/sny0421/workspace/windows-server-2019-japanese-1> Get-AzResourceProvider -ProviderNamespace Microsoft.KeyVault
+
+ProviderNamespace : Microsoft.KeyVault
+RegistrationState : Registered
+ResourceTypes     : {vaults}
+Locations         : {North Central US, East US, North Europe, West Europe…}
+
+ProviderNamespace : Microsoft.KeyVault
+RegistrationState : Registered
+ResourceTypes     : {vaults/secrets}
+Locations         : {North Central US, East US, North Europe, West Europe…}
+
+ProviderNamespace : Microsoft.KeyVault
+RegistrationState : Registered
+ResourceTypes     : {vaults/accessPolicies}
+Locations         : {North Central US, East US, North Europe, West Europe…}
+
+ProviderNamespace : Microsoft.KeyVault
+RegistrationState : Registered
+ResourceTypes     : {operations}
+Locations         : {}
+
+ProviderNamespace : Microsoft.KeyVault
+RegistrationState : Registered
+ResourceTypes     : {checkNameAvailability}
+Locations         : {}
+
+ProviderNamespace : Microsoft.KeyVault
+RegistrationState : Registered
+ResourceTypes     : {deletedVaults}
+Locations         : {North Central US, East US, North Europe, West Europe…}
+
+ProviderNamespace : Microsoft.KeyVault
+RegistrationState : Registered
+ResourceTypes     : {locations}
+Locations         : {}
+
+ProviderNamespace : Microsoft.KeyVault
+RegistrationState : Registered
+ResourceTypes     : {locations/deletedVaults}
+Locations         : {North Central US, East US, North Europe, West Europe…}
+
+ProviderNamespace : Microsoft.KeyVault
+RegistrationState : Registered
+ResourceTypes     : {locations/deleteVirtualNetworkOrSubnets}
+Locations         : {East US, North Central US, West Europe, North Europe…}
+
+ProviderNamespace : Microsoft.KeyVault
+RegistrationState : Registered
+ResourceTypes     : {locations/operationResults}
+Locations         : {North Central US, East US, North Europe, West Europe…}
+
+ProviderNamespace : Microsoft.KeyVault
+RegistrationState : Registered
+ResourceTypes     : {vaults/eventGridFilters}
+Locations         : {North Central US, East US, North Europe, West Europe…}
+
+
+PS /Users/sny0421/workspace/windows-server-2019-japanese-1> Import-Module Az.Account
+
+Import-Module: The specified module 'Az.Account' was not loaded because no valid module file was found in any module directory.
+
+[91mImport-Module: [91mThe specified module 'Az.Account' was not loaded because no valid module file was found in any module directory.[0m
+PS /Users/sny0421/workspace/windows-server-2019-japanese-1> Import-Module Az.Accounts
+PS /Users/sny0421/workspace/windows-server-2019-japanese-1> $currentAzContext = Get-AzContext
+PS /Users/sny0421/workspace/windows-server-2019-japanese-1> $imageResourceGroup = "AIB-Deploy-RG"
+PS /Users/sny0421/workspace/windows-server-2019-japanese-1> $subscriptionID = $currentAzContext.Subscription.Id
+PS /Users/sny0421/workspace/windows-server-2019-japanese-1> $subscriptionID
+269616a1-20ce-473c-9255-88c2446ebeef
