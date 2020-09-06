@@ -14,7 +14,8 @@ Register-AzResourceProvider -ProviderNamespace Microsoft.Compute
 Register-AzResourceProvider -ProviderNamespace Microsoft.KeyVault
 ```
 
-機能登録の確認
+### 機能登録の確認
+各機能が**[registered]**になっていることを確認。
 
 ```
 Get-AzProviderFeature -FeatureName VirtualMachineTemplatePreview -ProviderNamespace Microsoft.VirtualMachineImages
@@ -34,7 +35,7 @@ Import-Module Az.Accounts
 $currentAzContext = Get-AzContext
 
 # 変数の定義
-## Image Builder でイメージをデプロイするリソースグループ
+## Image Builder でイメージをデプロイするリソースグループの名前
 $imageResourceGroup = "AIB-Deploy-RG"
 
 ## Image Builder でイメージをデプロイするリージョン
@@ -77,48 +78,47 @@ $idenityNamePrincipalId=$(Get-AzUserAssignedIdentity -ResourceGroupName $imageRe
 ```
 
 ```
+# AIB 用のカスタムロールを作成
+## テンプレートのダウンロードパスを定義
 $aibRoleImageCreationUrl="https://raw.githubusercontent.com/danielsollondon/azvmimagebuilder/master/solutions/12_Creating_AIB_Security_Roles/aibRoleImageCreation.json"
 $aibRoleImageCreationPath = "aibRoleImageCreation.json"
-
-# download config
+## テンプレートをダウンロード
 Invoke-WebRequest -Uri $aibRoleImageCreationUrl -OutFile $aibRoleImageCreationPath -UseBasicParsing
 
+## テンプレート内の変数を置換
 ((Get-Content -path $aibRoleImageCreationPath -Raw) -replace '<subscriptionID>',$subscriptionID) | Set-Content -Path $aibRoleImageCreationPath
 ((Get-Content -path $aibRoleImageCreationPath -Raw) -replace '<rgName>', $imageResourceGroup) | Set-Content -Path $aibRoleImageCreationPath
 ((Get-Content -path $aibRoleImageCreationPath -Raw) -replace 'Azure Image Builder Service Image Creation Role', $imageRoleDefName) | Set-Content -Path $aibRoleImageCreationPath
 
-# create role definition
+## ロールを作成
 New-AzRoleDefinition -InputFile  ./aibRoleImageCreation.json
 
-# grant role definition to image builder service principal
+## マネージド ID にロールを割り当て
 New-AzRoleAssignment -ObjectId $idenityNamePrincipalId -RoleDefinitionName $imageRoleDefName -Scope "/subscriptions/$subscriptionID/resourceGroups/$imageResourceGroup"
-
-### NOTE: If you see this error: 'New-AzRoleDefinition: Role definition limit exceeded. No more role definitions can be created.' See this article to resolve:
-https://docs.microsoft.com/en-us/azure/role-based-access-control/troubleshooting
 ```
 
 ```
-$sigResourceGroupName = "SNY-LAB-GOLDEN-RG"
-$sigGallaryName = "SNYLAB_SIG"
-$repLocation = "japaneast"
-$sigImageDefineName = "WinSV2019JapaneseAIB"
-
-New-AzGalleryImageDefinition -GalleryName $sigGallaryName -ResourceGroupName $sigResourceGroupName -Location $repLocation -Name $sigImageDefineName -OsState generalized -OsType Windows -Publisher 'AIB-Demo' -Offer 'Windows' -Sku 'Win2019'
-```
+# イメージテンプレートの作成
+## イメージテンプレートのダウンロード URL を定義
+$templateUrl="https://raw.githubusercontent.com/sny0421/windows-server-2019-japanese/master/image-build-template.json"
+$templateFilePath = "armImageBuilderTemplate.json"
+## イメージテンプレートをダウンロード
+Invoke-WebRequest -Uri $templateUrl -OutFile $templateFilePath -UseBasicParsing
 
 
 ((Get-Content -path $templateFilePath -Raw) -replace '<subscriptionID>',$subscriptionID) | Set-Content -Path $templateFilePath
 ((Get-Content -path $templateFilePath -Raw) -replace '<rgName>',$imageResourceGroup) | Set-Content -Path $templateFilePath
 ((Get-Content -path $templateFilePath -Raw) -replace '<region>',$location) | Set-Content -Path $templateFilePath
 ((Get-Content -path $templateFilePath -Raw) -replace '<runOutputName>',$runOutputName) | Set-Content -Path $templateFilePath
-
 ((Get-Content -path $templateFilePath -Raw) -replace '<imageDefName>',$sigImageDefineName) | Set-Content -Path $templateFilePath
 ((Get-Content -path $templateFilePath -Raw) -replace '<sharedImageGalName>',$sigGalleryName) | Set-Content -Path $templateFilePath
 ((Get-Content -path $templateFilePath -Raw) -replace '<region1>',$location) | Set-Content -Path $templateFilePath
 ((Get-Content -path $templateFilePath -Raw) -replace '<region2>',$repLocation) | Set-Content -Path $templateFilePath
 ((Get-Content -path $templateFilePath -Raw) -replace '<imgBuilderId>',$idenityNameResourceId) | Set-Content -Path $templateFilePath
 ((Get-Content -path $templateFilePath -Raw) -replace '<imageName>',$imageName) | Set-Content -Path $templateFilePath
-New-AzResourceGroupDeployment -ResourceGroupName $imageResourceGroup -TemplateFile $templateFilePath -api-version "2019-05-01-preview" -imageTemplateName $imageTemplateName -svclocation $location
 
+## イメージテンプレートのデプロイ
+New-AzResourceGroupDeployment -ResourceGroupName $imageResourceGroup -TemplateFile $templateFilePath -api-version "2019-05-01-preview" -imageTemplateName $imageTemplateName -svclocation $location
+```
 
 
