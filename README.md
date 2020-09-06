@@ -131,7 +131,7 @@ Invoke-WebRequest -Uri $templateUrl -OutFile $templateFilePath -UseBasicParsing
 ```
 
 ## イメージテンプレートのデプロイ
-カスタムイメージテンプレートをデプロイします。
+Azure Image Builder 用のイメージテンプレートをデプロイします。
 
 ```
 ## イメージテンプレートのデプロイ
@@ -171,3 +171,4 @@ $buildJsonStatus = (Invoke-WebRequest -Method GET  -Uri $urlBuildStatus -UseBasi
 ```
 
 ## イメージから VM を作成
+イメージ定義から VM を作成します。
