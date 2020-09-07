@@ -13,8 +13,10 @@ Set-WinSystemLocale -SystemLocale ja-JP
 #タイムゾーンを東京にします。
 Set-TimeZone -Id "Tokyo Standard Time"
 
+# ユーザーのカルチャー設定を変更します。
 Set-Culture ja-JP
 
+# レジストリを変更し、Welcome スクリーンとデフォルトユーザーの表示言語を変更します。
 $DefaultHKEY = "HKU\DEFAULT_USER"
 $DefaultRegPath = "C:\Users\Default\NTUSER.DAT"
 
