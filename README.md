@@ -83,7 +83,7 @@ Invoke-WebRequest -Uri $aibRoleImageCreationUrl -OutFile $aibRoleImageCreationPa
 ((Get-Content -path $aibRoleImageCreationPath -Raw) -replace '<rgName>', $imageResourceGroup) | Set-Content -Path $aibRoleImageCreationPath
 
 ## カスタムロールを作成
-New-AzRoleDefinition -InputFile ./aibRoleImageCreation.json
+New-AzRoleDefinition -InputFile $aibRoleImageCreationPath
 
 ## マネージド ID にカスタムロールを割り当て
 New-AzRoleAssignment -ObjectId $idenityNamePrincipalId -RoleDefinitionName $imageRoleDefName -Scope "/subscriptions/$subscriptionID/resourceGroups/$imageResourceGroup"
@@ -125,8 +125,8 @@ Invoke-WebRequest -Uri $templateUrl -OutFile $templateFilePath -UseBasicParsing
 ((Get-Content -path $templateFilePath -Raw) -replace '<runOutputName>',$runOutputName) | Set-Content -Path $templateFilePath
 ((Get-Content -path $templateFilePath -Raw) -replace '<sharedImageGalName>',$sigGalleryName) | Set-Content -Path $templateFilePath
 ((Get-Content -path $templateFilePath -Raw) -replace '<imageDefName>',$sigImageDefineName) | Set-Content -Path $templateFilePath
-((Get-Content -path $templateFilePath -Raw) -replace '<region1>',$location) | Set-Content -Path $templateFilePath
-((Get-Content -path $templateFilePath -Raw) -replace '<region2>',$repLocation) | Set-Content -Path $templateFilePath
+((Get-Content -path $templateFilePath -Raw) -replace '<replicaRegion1>',$location) | Set-Content -Path $templateFilePath
+((Get-Content -path $templateFilePath -Raw) -replace '<replicaRegion2>',$repLocation) | Set-Content -Path $templateFilePath
 ((Get-Content -path $templateFilePath -Raw) -replace '<imgBuilderId>',$idenityNameResourceId) | Set-Content -Path $templateFilePath
 ```
 
